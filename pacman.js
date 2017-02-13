@@ -64,7 +64,9 @@ function printGhostsInMenu() {
 function displayMenu() {
   console.log('\n\nSelect Option:\n');  // each \n creates a new line
   console.log('(d) Eat Dot');
-  console.log('(p) Eat Power-Pellet');
+  if (powerPellets > 0) {
+    console.log('(p) Eat Power-Pellet');
+  }
   printGhostsInMenu();
   console.log('(q) Quit');
 }
@@ -90,11 +92,15 @@ function eatDot() {
 }
 
 function eatPowerPellet() {
-  score += 50;
-  ghosts.forEach(function(ghost) {
-    ghost.edible = true;
-  });
-  powerPellets--;
+  if (powerPellets > 0) {
+    score += 50;
+    ghosts.forEach(function(ghost) {
+      ghost.edible = true;
+    });
+    powerPellets--;
+  } else {
+    console.log('\nNo Power-Pellets left!');
+  }
 }
 
 function eatGhost(ghost) {
@@ -154,7 +160,7 @@ drawScreen();
 stdin.on('data', function(key) {
   process.stdout.write(key);
   processInput(key);
-  setTimeout(drawScreen, 300); // The command prompt will flash a message for 300 milliseoncds before it re-draws the screen. You can adjust the 300 number to increase this.
+  setTimeout(drawScreen, 700); // The command prompt will flash a message for 300 milliseoncds before it re-draws the screen. You can adjust the 300 number to increase this.
 });
 
 // Player Quits
