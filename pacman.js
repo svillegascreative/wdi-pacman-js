@@ -37,7 +37,7 @@ ghosts = [inky, blinky, pinky, clyde];
 
 function printGhostsInMenu() {
   ghosts.forEach(function(ghost) {
-    console.log('\(' + ghost.menu_option + '\) ' + ghost.name);
+    console.log('\(' + ghost.menu_option + '\) Eat ' + ghost.name);
   });
 }
 
