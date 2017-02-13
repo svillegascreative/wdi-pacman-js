@@ -108,6 +108,10 @@ function eatGhost(ghost) {
     lives--;
     outOfLives(lives);
     console.log('\n' + ghost.name + ' \(the ' + ghost.colour + ' one\) killed Pac-Man!');
+  } else {
+    console.log('\nMmm! ' + ghost.character + ', delicious ' + ghost.name + '!');
+    score += 200;
+    ghost.edible = false;
   }
 }
 
