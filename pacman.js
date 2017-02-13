@@ -64,6 +64,7 @@ function printGhostsInMenu() {
 function displayMenu() {
   console.log('\n\nSelect Option:\n');  // each \n creates a new line
   console.log('(d) Eat Dot');
+  console.log('(p) Eat Power-Pellet');
   printGhostsInMenu();
   console.log('(q) Quit');
 }
@@ -88,6 +89,14 @@ function eatDot() {
   score += 10;
 }
 
+function eatPowerPellet() {
+  score += 50;
+  ghosts.forEach(function(ghost) {
+    ghost.edible = true;
+  });
+  powerPellets--;
+}
+
 function eatGhost(ghost) {
   if (ghost.edible === false) {
     lives--;
@@ -103,6 +112,9 @@ function processInput(key) {
     case '\u0003': // This makes it so CTRL-C will quit the program
     case 'q':
       process.exit();
+      break;
+    case 'p':
+      eatPowerPellet();
       break;
     case '1':
       eatGhost(inky);
