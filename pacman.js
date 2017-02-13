@@ -39,11 +39,11 @@ ghosts = [inky, blinky, pinky, clyde];
 // Draw the screen functionality
 function drawScreen() {
   clearScreen();
-  setTimeout(function() {
+  //setTimeout(function() {
     displayStats();
     displayMenu();
     displayPrompt();
-  }, 10);
+  //}, 10);
 }
 
 function clearScreen() {
@@ -74,6 +74,7 @@ function displayPrompt() {
 
 function outOfLives(lives) {
   if (lives === 0) {
+    drawScreen();
     console.log('\nYou are out of lives!');
     process.exit();
   }
