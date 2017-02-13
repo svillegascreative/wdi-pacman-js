@@ -34,7 +34,15 @@ var clyde = {
   edible: false
 };
 
-ghosts = [inky, blinky, pinky, clyde];
+var ghosts = [inky, blinky, pinky, clyde];
+
+function checkEdible(ghost) {
+  if (ghost.edible === true) {
+    return 'edible';
+  } else {
+    return 'inedible';
+  }
+}
 
 
 // Draw the screen functionality
@@ -57,7 +65,7 @@ function displayStats() {
 
 function printGhostsInMenu() {
   ghosts.forEach(function(ghost) {
-    console.log('\(' + ghost.menu_option + '\) Eat ' + ghost.name);
+    console.log('\(' + ghost.menu_option + '\) Eat ' + ghost.name + ' \(' + checkEdible(ghost) + '\)');
   });
 }
 
