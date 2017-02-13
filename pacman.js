@@ -2,6 +2,7 @@
 var score = 0;
 var lives = 2;
 var powerPellets = 4;
+var dots = 240;
 
 
 // Define your ghosts here
@@ -60,7 +61,7 @@ function clearScreen() {
 }
 
 function displayStats() {
-  console.log('Score: ' + score + '  ||  Lives: ' + lives + '  ||  Power Pellets: ' + powerPellets);
+  console.log('Score: ' + score + '  ||  Lives: ' + lives + '  ||  Power Pellets: ' + powerPellets + '  ||  Dots: ' + dots);
 }
 
 function printGhostsInMenu() {
@@ -71,7 +72,15 @@ function printGhostsInMenu() {
 
 function displayMenu() {
   console.log('\n\nSelect Option:\n');  // each \n creates a new line
-  console.log('(d) Eat Dot');
+  if (dots >= 100) {
+    console.log('(a) Eat 100 dots');
+  }
+  if (dots >= 10) {
+    console.log('(s) Eat 10 dots');
+  }
+  if (dots > 0) {
+    console.log('(d) Eat 1 dot');
+  }
   if (powerPellets > 0) {
     console.log('(p) Eat Power-Pellet');
   }
@@ -94,9 +103,14 @@ function outOfLives(lives) {
 
 
 // Menu Options
-function eatDot() {
-  console.log('\nChomp!');
-  score += 10;
+function eatDot(numDots) {
+  if (dots < numDots) {
+    console.log('\nNot enough dots!');
+  } else {
+    console.log('\nChomp!');
+    score += (10 * numDots);
+    dots -= numDots;
+  }
 }
 
 function eatPowerPellet() {
@@ -127,9 +141,14 @@ function eatGhost(ghost) {
 // Process Player's Input
 function processInput(key) {
   switch(key) {
-    case '\u0003': // This makes it so CTRL-C will quit the program
-    case 'q':
-      process.exit();
+    case 'a':
+      eatDot(100);
+      break;
+    case 's':
+      eatDot(10);
+      break;
+    case 'd':
+      eatDot(1);
       break;
     case 'p':
       eatPowerPellet();
@@ -146,8 +165,9 @@ function processInput(key) {
     case '4':
       eatGhost(clyde);
       break;
-    case 'd':
-      eatDot();
+    case '\u0003': // This makes it so CTRL-C will quit the program
+    case 'q':
+      process.exit();
       break;
     default:
       console.log('\nInvalid Command!');
