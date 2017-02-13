@@ -72,6 +72,13 @@ function displayPrompt() {
   process.stdout.write('\nWaka Waka :v '); // :v is the Pac-Man emoji.
 }
 
+function outOfLives(lives) {
+  if (lives === 0) {
+    console.log('\nYou are out of lives!');
+    process.exit();
+  }
+}
+
 
 // Menu Options
 function eatDot() {
@@ -82,6 +89,7 @@ function eatDot() {
 function eatGhost(ghost) {
   if (ghost.edible === false) {
     lives--;
+    outOfLives(lives);
     console.log('\n' + ghost.name + ' \(the ' + ghost.colour + ' one\) killed Pac-Man!');
   }
 }
